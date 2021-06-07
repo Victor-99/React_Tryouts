@@ -236,10 +236,10 @@ let bookStore={
 		    publisher: "PUBLISH",
 		    author: "Michael J. Barlotta, Jason R. Weiss",
 		    inWishlist:false
-		  },
-	  ],
+		  }],
 	  curPage:1,
 	  booksRead:[],
+	  WishlistArr:[]
 
 }
 
@@ -262,15 +262,19 @@ const booksReducer=(state=bookStore,action)=>{
 
 		case ADD_TO_WISHLIST:
 		const indx=Number(action.payload);
-		state.booksList[indx].inWishlist?(
-			state={...state,state.booksList[indx].inWishlist:true,
-				booksRead:[...state.booksRead,Number(indx)]}
-		):(
-			state={...state,state.booksList[indx].inWishlist:false,
-				booksRead:[...state.booksRead.filter(function (value,arr,indx){
-				return Number(index!=indx);
-			}))]}
-		);
+		if(state.booksList[indx].inWishlist){
+			state.booksList[indx].inWishlist=true;
+			state={...state,WishlistArr:[...state.WishlistArr,indx]}
+			console.log("Added To Wishlist");}
+		else{
+			state.booksList[indx].inWishlist=false;
+			state={...state,
+				WishlistArr:[...state.WishlistArr.filter(
+					(value,arr,indx)=>{
+						return indx!==indx;
+					})]}
+			console.log("Removed From Wishlist");
+		};
 		return state;
 
 		case RESET_BOOKS_READ:

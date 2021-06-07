@@ -1,14 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 
 import BookMark from './bookMark/bookMark';
+import {AddToWishlist} from '../../Services/BookStoreServices';
 
 import "./Elems.css";
 
 const Elems=(props)=>{
-
-	const addToBookMarks=()=>{
-
+	const dispatch=useDispatch();
+	const addToBookMarks=(e)=>{
+		e.preventDefault();
+		dispatch(AddToWishlist(e.target.value));
+		console.log("BookmarkAdded");
 	}
 	let bookAv=null;
 	if(props.data && props.data.length>0){
@@ -29,7 +33,7 @@ const Elems=(props)=>{
 					 Read more
 				    </button>
 				    </Link>
-				    <BookMark inWishList={false}/>
+				    <BookMark onClick={addToBookMarks} value={bookAv.isbn}/>
 				    </span>
 				  </div>
 				</div>
