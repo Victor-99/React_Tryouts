@@ -37,8 +37,6 @@ class Home extends Component {
 
 
   render() {
-	  //("props");
-	  //(this.props);
     return (
 	    <>
       <Elems data={this.props.booksList.booksList.slice((this.props.booksList.curPage-1)*9,this.props.booksList.curPage*9)} sectionTitle="Welcome to BookStore"/>
@@ -51,7 +49,7 @@ class Home extends Component {
 
 
 const mapStateToProps=(state)=>{
-	//("Checking state");
+	console.log(state.booksList.WishlistArr);
 	return{
 		booksList:state.booksList
 	}

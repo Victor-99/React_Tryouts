@@ -262,17 +262,17 @@ const booksReducer=(state=bookStore,action)=>{
 
 		case ADD_TO_WISHLIST:
 		const indx=Number(action.payload);
-		if(state.booksList[indx].inWishlist){
+		if(state.booksList[indx].inWishlist===false){
 			state.booksList[indx].inWishlist=true;
 			state={...state,WishlistArr:[...state.WishlistArr,indx]}
 			console.log("Added To Wishlist");}
 		else{
 			state.booksList[indx].inWishlist=false;
+
 			state={...state,
 				WishlistArr:[...state.WishlistArr.filter(
-					(value,arr,indx)=>{
-						return indx!==indx;
-					})]}
+					elem=>elem!==indx
+					)]}
 			console.log("Removed From Wishlist");
 		};
 		return state;
